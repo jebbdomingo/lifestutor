@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /var/www/lifestutor.local/public_html/symfony/app/config/routing_dev.yml
