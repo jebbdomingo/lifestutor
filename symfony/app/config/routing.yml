@@ -1,0 +1,19 @@
+lifestutor_inventory:
+    resource: "@LifestutorInventoryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lifestutor_store:
+    type: rest
+    prefix: /api
+    resource: "@LifestutorStoreBundle/Resources/config/routing.yml"
+
+lifestutor_oauthserver:
+    type: rest
+    prefix: /oauthserver
+    resource: "@LifestutorOAuthServerBundle/Resources/config/routing.yml"
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"

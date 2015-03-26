@@ -1,0 +1,41 @@
+lifestutor_store_user:
+    type: rest
+    prefix: /v1
+    resource: "Lifestutor\StoreBundle\Controller\UserController"
+    name_prefix: api_1_
+
+# lifestutor_store_item:
+#     type: rest
+#     prefix: /v1
+#     resource: "Lifestutor\StoreBundle\Controller\ItemController"
+#     name_prefix: api_1_
+
+lifestutor_store_shop_all:
+    pattern:  /v1/shops
+    defaults: { _controller: LifestutorStoreBundle:Shop:all, _format: ~ }
+    requirements:
+        _method: GET
+
+lifestutor_store_shop_options:
+    pattern:  /v1/shops
+    defaults: { _controller: LifestutorStoreBundle:Shop:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
+lifestutor_store_item_all:
+    pattern:  /v1/items
+    defaults: { _controller: LifestutorStoreBundle:Useritem:all, _format: ~ }
+    requirements:
+        _method: GET
+
+lifestutor_store_item_options:
+    pattern:  /v1/items
+    defaults: { _controller: LifestutorStoreBundle:Useritem:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
+lifestutor_store_user_items_all:
+    pattern:  /v1/user/{id}/items
+    defaults: { _controller: LifestutorStoreBundle:User:items, _format: ~ }
+    requirements:
+        _method: GET

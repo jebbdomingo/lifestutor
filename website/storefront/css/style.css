@@ -1,0 +1,12 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.ng-invalid.ng-dirty {
+    border-color: #FA787E;
+}

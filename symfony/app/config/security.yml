@@ -1,0 +1,35 @@
+security:
+    encoders:
+        Lifestutor\StoreBundle\Document\User:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        in_memory:
+            memory: ~
+        user_provider:
+            id: apikey_user_provider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
+        api:
+            pattern:    ^/api/.*
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  true
+
+        # secured_area:
+        #     pattern:    ^/
+        #     stateless: true
+        #     simple_preauth:
+        #         authenticator: apikey_authenticator
+
+        default:
+            anonymous: ~

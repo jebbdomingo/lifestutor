@@ -1,0 +1,21 @@
+<div>
+    <div class="container">
+        <top-menu></top-menu>
+        <div ng-if="appCtrl.currentUser.id">Welcome, {{ appCtrl.currentUser.firstname }} {{ appCtrl.currentUser.lastname }}</div>
+        <div ng-if="appCtrl.isAuthorized(appCtrl.userRoles.admin)">You're admin.</div>
+    </div>
+    <div ui-view></div>
+
+    <!-- Page footer -->
+    <div class="container">
+
+        <hr>
+        
+        <footer>
+            <p>&copy; Life's Tutor Company 2014</p>
+        </footer>
+    </div>
+</div>
+{{ appCtrl.loginModalId }}
+<my-login currentuser="appCtrl.currentUser"></my-login>
+<my-signup currentuser="appCtrl.currentUser"></my-signup>

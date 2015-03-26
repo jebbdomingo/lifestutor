@@ -1,0 +1,3 @@
+#    lifestutor_store.example:
+#        class: Lifestutor\StoreBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

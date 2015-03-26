@@ -1,0 +1,16 @@
+parameters:
+    lifestutor_store.service.user.class: Lifestutor\StoreBundle\Service\UserService
+    lifestutor_store.user.class: Lifestutor\StoreBundle\Document\User
+    lifestutor_store.service.customer.class: Lifestutor\StoreBundle\Service\CustomerService
+    lifestutor_store.customer.class: Lifestutor\StoreBundle\Document\Customer
+
+services:
+#    lifestutor_store.example:
+#        class: Lifestutor\StoreBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    lifestutor_store.user.service:
+        class:      "%lifestutor_store.service.user.class%"
+        arguments:  ["@security.context", "@doctrine_mongodb", "%lifestutor_store.user.class%", "@form.factory", "@security.password_encoder"]
+    lifestutor_store.customer.service:
+        class:      "%lifestutor_store.service.customer.class%"
+        arguments:  ["@security.context", "@doctrine_mongodb", "%lifestutor_store.customer.class%", "@form.factory", "@security.password_encoder"]

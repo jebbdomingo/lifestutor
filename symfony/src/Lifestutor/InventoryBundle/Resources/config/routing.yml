@@ -1,0 +1,3 @@
+lifestutor_inventory_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: LifestutorInventoryBundle:Default:index }
