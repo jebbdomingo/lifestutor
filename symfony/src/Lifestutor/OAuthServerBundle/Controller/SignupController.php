@@ -35,7 +35,6 @@ class SignupController extends FOSRestController
      */
     public function postSignupAction(Request $request)
     {
-        error_log(print_r($request->request->all(), true));
         try {
             $customer = $this->container->get('lifestutor_store.customer.service')->post($request->request->all());
 

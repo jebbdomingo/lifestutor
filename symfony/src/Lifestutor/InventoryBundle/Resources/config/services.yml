@@ -1,4 +1,8 @@
+parameters:
+    lifestutor_inventory.book.service.class: Lifestutor\InventoryBundle\Service\BookService
+    lifestutor_inventory.book.class: Lifestutor\InventoryBundle\Document\Book
+
 services:
-#    lifestutor_inventory.example:
-#        class: Lifestutor\InventoryBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    lifestutor_store.book.service:
+        class:      "%lifestutor_inventory.book.service.class%"
+        arguments:  ["@doctrine_mongodb", "%lifestutor_inventory.book.class%", "@form.factory"]

@@ -8,6 +8,7 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -35,7 +36,6 @@ class Item
 
     /**
      * @MongoDB\String
-     * @Expose
      */
     protected $itemType = 'Item';
 
@@ -43,40 +43,49 @@ class Item
      * @MongoDB\String
      * @Assert\NotBlank()
      * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $name;
 
     /**
      * @MongoDB\String
      * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $code;
 
     /**
      * @MongoDB\Float
+     * @Expose
+     * @Groups({"inventory"})
      */
     protected $cost;
 
     /**
      * @MongoDB\Float
      * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $sellingPrice;
 
     /**
      * @MongoDB\Int
      * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $quantity;
 
     /**
      * @MongoDB\Float
+     * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $rewardPoint;
 
     /**
      * @MongoDB\Boolean
      * @Expose
+     * @Groups({"inventory"})
      */
     protected $published;
 

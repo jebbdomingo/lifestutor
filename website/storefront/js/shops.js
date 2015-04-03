@@ -1,7 +1,7 @@
-(function(){
+/*(function(){
     /**
      * Shops module.
-     */
+     /
     var app = angular.module('shops', []);
 
     // Shops list directive.
@@ -24,4 +24,4 @@
             user.shops = data._embedded.shops;
         });
     });
-})();
+})();*/

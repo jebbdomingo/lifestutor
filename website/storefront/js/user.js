@@ -4,16 +4,16 @@
     /**
      * Signup Directive.
      */
-    app.directive('mySignup', function(SOCIAP_CONFIG, AUTH_EVENTS){
+    app.directive('mySignup', function(APP_CONFIG, AUTH_EVENTS){
         return {
             restrict: 'E',
             scope: { currentUser: '=currentuser' },
-            templateUrl: SOCIAP_CONFIG.baseUrl + 'partials/signup.html',
+            templateUrl: APP_CONFIG.baseUrl + 'partials/signup.html',
             controller: 'SignupController',
             controllerAs: 'signupCtrl'
         };
     });
-    app.controller('SignupController', function($scope, $rootScope, $http, SOCIAP_CONFIG, AUTH_EVENTS, AuthService){
+    app.controller('SignupController', function($scope, $rootScope, $http, APP_CONFIG, AUTH_EVENTS, AuthService){
         this.credentials = {
             username: '',
             password: '',
@@ -25,7 +25,7 @@
         signup.formError = '';
 
         var successSignupCallback = function(resource) {
-            $(SOCIAP_CONFIG.signupModalId).modal('hide');
+            $(APP_CONFIG.signupModalId).modal('hide');
             console.log('Successfull signup');
             console.log(resource);
 
@@ -39,7 +39,7 @@
             AuthService.login(credentials).then(function(user) {
                 $scope.currentUser = user;
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                $(SOCIAP_CONFIG.signupModalId).modal('hide');
+                $(APP_CONFIG.signupModalId).modal('hide');
             }, function(resource) {
                 console.log('Signup > Login Failed');
                 console.log(resource);
@@ -73,7 +73,7 @@
 
         this.signup = function(credentials) {
             console.log(credentials);
-            return $http.post(SOCIAP_CONFIG.apiUserSignupUrl, credentials).then(successSignupCallback, failedSignupCallback);
+            return $http.post(APP_CONFIG.apiUserSignupUrl, credentials).then(successSignupCallback, failedSignupCallback);
         };
     });
 })();

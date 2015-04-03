@@ -1,6 +1,7 @@
 lifestutor_inventory:
+    type: rest
+    prefix: /api
     resource: "@LifestutorInventoryBundle/Resources/config/routing.yml"
-    prefix:   /
 
 lifestutor_store:
     type: rest

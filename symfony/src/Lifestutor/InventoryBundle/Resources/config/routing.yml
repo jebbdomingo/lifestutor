@@ -1,3 +1,11 @@
-lifestutor_inventory_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: LifestutorInventoryBundle:Default:index }
+lifestutor_inventory_book_all:
+    pattern:  /v1/books
+    defaults: { _controller: LifestutorInventoryBundle:Book:all, _format: ~ }
+    requirements:
+        _method: GET
+
+lifestutor_inventory_book_options:
+    pattern:  /v1/books
+    defaults: { _controller: LifestutorInventoryBundle:Book:options, _format: ~ }
+    requirements:
+        _method: OPTIONS

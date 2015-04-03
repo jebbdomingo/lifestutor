@@ -2,7 +2,7 @@
     /**
      * Main app module.
      */
-    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'app.User', 'header', 'items', 'ui.router']);
+    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'ui.router', 'app.Books']);
 
     /**
      * Application Directive.
@@ -20,6 +20,10 @@
         this.currentUser  = Session.getCurrentUser();
         this.userRoles    = USER_ROLES;
         this.isAuthorized = AuthService.isAuthorized;
+
+        if (!AuthService.isAuthenticated()) {
+            location.assign("/");
+        }
     });
 
     // Run.

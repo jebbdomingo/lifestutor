@@ -97,14 +97,14 @@ class UserController extends FOSRestController
         $user = $this->getOr404($id);
 
         $view = $this->view($user, Codes::HTTP_OK);
-        $view->setFormat('json');
+        //$view->setFormat('json');
 
         return $this->handleView($view);
     }
 
     public function getLoggedinuserAction()
     {
-        $this->generateFixtures();
+        //$this->generateFixtures();
 
         //error_log(print_r($this->get('security.context')->getToken(), true));die;
         $id   = $this->get('security.context')->getToken()->getUser()->getId();
