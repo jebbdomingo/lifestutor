@@ -92,9 +92,8 @@ class Item
     /**
      * Constructor
      */
-    public function __construct($name)
+    public function __construct()
     {
-        $this->setName($name);
         $this->catalogs = new ArrayCollection();
     }
 

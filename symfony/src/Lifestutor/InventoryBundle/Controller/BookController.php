@@ -43,8 +43,7 @@ class BookController extends FOSRestController
     public function bookAction($id)
     {
         $book = $this->getOr404($id);
-
-        $view = $this->view($book, Codes::HTTP_OK);
+        $view = $this->setInventorySerializationContext($this->view($book, Codes::HTTP_OK));
 
         return $this->handleView($view);
     }
@@ -86,10 +85,24 @@ class BookController extends FOSRestController
             false    // false = generate relative URIs
         );
 
-        $view = $this->view($paginatedCollection, Codes::HTTP_OK);
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'inventory')));
+        $view = $this->setInventorySerializationContext($this->view($paginatedCollection, Codes::HTTP_OK));
 
         return $this->handleView($view);
+    }
+
+
+    /**
+     * Set serializtion context to Inventory group (for use with Inventory Web App)
+     * 
+     * @param FOS\RestBundle\View\View $view
+     *
+     * @return  FOS\RestBundle\View\View
+     */
+    private function setInventorySerializationContext($view)
+    {
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'inventory')));
+
+        return $view;
     }
 
     /**

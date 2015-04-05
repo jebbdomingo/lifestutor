@@ -55,8 +55,18 @@
                   }
         };
 
+        var bookForm = {
+            name: 'book_form',
+            url: '/book_form',
+            templateUrl: APP_CONFIG.baseUrl + "templates/book/form.html",
+            data: {
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.admin]
+                  }
+        };
+
         $stateProvider.state(dashboard);
         $stateProvider.state(books);
+        $stateProvider.state(bookForm);
     });
 
     /**

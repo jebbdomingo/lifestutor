@@ -9,3 +9,9 @@ lifestutor_inventory_book_options:
     defaults: { _controller: LifestutorInventoryBundle:Book:options, _format: ~ }
     requirements:
         _method: OPTIONS
+
+lifestutor_inventory_post_book:
+    pattern:  /v1/books
+    defaults: { _controller: LifestutorInventoryBundle:Book:post, _format: ~ }
+    requirements:
+        _method: POST

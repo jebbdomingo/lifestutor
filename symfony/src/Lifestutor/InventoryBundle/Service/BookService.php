@@ -4,6 +4,7 @@ namespace Lifestutor\InventoryBundle\Service;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormFactoryInterface;
+use Lifestutor\InventoryBundle\Document\Book;
 use Lifestutor\InventoryBundle\Form\BookType;
 use Lifestutor\InventoryBundle\Exception\InvalidFormException;
 
@@ -86,15 +87,15 @@ class BookService implements BookServiceInterface
     /**
      * Processes the form.
      *
-     * @param UserInterface $book
-     * @param array         $parameters
-     * @param String        $method
+     * @param Lifestutor\InventoryBundle\Document\Book  $book
+     * @param array                                     $parameters
+     * @param string                                    $method
      *
      * @return UserInterface
      *
      * @throws Lifestutor\StoreBundle\Exception\InvalidFormException
      */
-    private function processForm(UserInterface $book, array $parameters, $method = "PUT")
+    private function processForm(book $book, array $parameters, $method = "PUT")
     {
         $form = $this->formFactory->create(new BookType(), $book, array('method' => $method));
 

@@ -31,6 +31,7 @@ class User implements UserInterface, EquatableInterface
 
     /**
      * @MongoDB\String
+     * @Expose
      */
     protected $userType = 'User';
 
