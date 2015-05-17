@@ -194,5 +194,15 @@
         this.getId = function() {
             return $stateParams.id;
         }
+
+    });
+
+    app.controller('HelloController', function($scope) {
+        //alert('test');
+        console.log($scope.$flow);
+
+        var blob = new Blob(['a'], {type: "image/png"});
+        blob.name = 'file.png';
+        $scope.$flow.addFile(blob);
     });
 })();

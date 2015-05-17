@@ -26,7 +26,7 @@
                         <input type="file" style="visibility: hidden; position: absolute;" multiple="multiple">
                     </span>
 
-                    <table border="1" cellpadding="3" cellspacing="3">
+                    <table border="1" cellpadding="3" cellspacing="3" ng-controller="HelloController">
                         <tr ng-repeat="file in $flow.files">
                             <td><img flow-img="$flow.files[$index]" width="100" /></td>
                             <td>{{$index+1}}</td>   
