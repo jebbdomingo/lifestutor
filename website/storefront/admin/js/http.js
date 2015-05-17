@@ -49,7 +49,7 @@
         var books = {
             name: 'books',
             url: '/books',
-            templateUrl: APP_CONFIG.baseUrl + "templates/books.html",
+            templateUrl: APP_CONFIG.baseUrl + "templates/book/books.html",
             data: {
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.admin]
                   }
@@ -64,9 +64,19 @@
                   }
         };
 
+        var bookEditForm = {
+            name: 'book_edit_form',
+            url: '/book_form/:id',
+            templateUrl: APP_CONFIG.baseUrl + "templates/book/edit_form.html",
+            data: {
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.admin]
+                  }
+        };
+
         $stateProvider.state(dashboard);
         $stateProvider.state(books);
         $stateProvider.state(bookForm);
+        $stateProvider.state(bookEditForm);
     });
 
     /**

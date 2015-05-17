@@ -90,11 +90,19 @@ class Item
     protected $published;
 
     /**
+     * @MongoDB\Boolean
+     * @Expose
+     * @Groups({"inventory"})
+     */
+    protected $deleted;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->catalogs = new ArrayCollection();
+        $this->deleted  = false;
     }
 
     /**
@@ -123,6 +131,16 @@ class Item
      * @return id $id
      */
     public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function setId($id)
     {
         return $this->id;
     }
@@ -284,12 +302,34 @@ class Item
     /**
      * Publish
      *
-     * @param boolean $published
+     * @param boolean $bool
      * @return self
      */
-    public function publish($published)
+    public function setPublished($bool)
     {
-        $this->published = $published;
+        $this->published = $bool;
+        return $this;
+    }
+
+    /**
+     * Publish use case
+     * 
+     * @return self
+     */
+    public function publish()
+    {
+        $this->setPublished(true);
+        return $this;
+    }
+
+    /**
+     * Un-publish use case
+     * 
+     * @return self
+     */
+    public function unPublish()
+    {
+        $this->setPublished(false);
         return $this;
     }
 
@@ -301,5 +341,27 @@ class Item
     public function isPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $bool
+     * @return self
+     */
+    public function setDeleted($bool)
+    {
+        $this->deleted = $bool;
+        return $this;
+    }
+
+    /**
+     * Is deleted
+     *
+     * @return boolean $deleted
+     */
+    public function isDSeleted()
+    {
+        return $this->deleted;
     }
 }

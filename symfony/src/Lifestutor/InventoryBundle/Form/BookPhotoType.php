@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class BookType extends AbstractType
+class BookPhotoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,12 +16,6 @@ class BookType extends AbstractType
     {
         $builder
             ->add('id')
-            ->add('name')
-            ->add('code')
-            ->add('cost')
-            ->add('sellingPrice')
-            ->add('quantity')
-            ->add('rewardPoint')
         ;
     }
     
@@ -31,9 +25,10 @@ class BookType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Lifestutor\InventoryBundle\Document\Book',
+            'data_class'      => 'Lifestutor\InventoryBundle\Document\BookPhoto',
             'csrf_protection' => false,
-            'error_bubbling' => true,
+            'error_bubbling'  => true,
+            'allow_extra_fields' => true,
         ));
     }
 
@@ -42,6 +37,6 @@ class BookType extends AbstractType
      */
     public function getName()
     {
-        return 'book';
+        return 'bookphoto';
     }
 }

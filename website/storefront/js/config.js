@@ -18,6 +18,7 @@
         loginModalId:       '#loginModal',
         signupModalId:      '#signupModal',
         apiBookUrl:         'http://lifestutor.local:8083/api/v1/books',
+        //apiBookUploadUrl:   'http://lifestutor.local:8083/api/v1/books/upload',
         baseUrl:            baseurl
     });    
 

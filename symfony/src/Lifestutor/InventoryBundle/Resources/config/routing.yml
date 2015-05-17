@@ -1,3 +1,15 @@
+lifestutor_inventory_book:
+    pattern:  /v1/books/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Book:book, _format: ~ }
+    requirements:
+        _method: GET
+
+lifestutor_inventory_book_edit_options:
+    pattern:  /v1/books/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Book:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
 lifestutor_inventory_book_all:
     pattern:  /v1/books
     defaults: { _controller: LifestutorInventoryBundle:Book:all, _format: ~ }
@@ -15,3 +27,33 @@ lifestutor_inventory_post_book:
     defaults: { _controller: LifestutorInventoryBundle:Book:post, _format: ~ }
     requirements:
         _method: POST
+
+lifestutor_inventory_put_book:
+    pattern:  /v1/books
+    defaults: { _controller: LifestutorInventoryBundle:Book:update, _format: ~ }
+    requirements:
+        _method: PUT
+
+lifestutor_inventory_delete_book:
+    pattern:  /v1/books/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Book:delete, _format: ~ }
+    requirements:
+        _method: DELETE
+
+lifestutor_inventory_patch_book:
+    pattern:  /v1/books/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Book:patch, _format: ~ }
+    requirements:
+        _method: PATCH
+
+lifestutor_inventory_upload_book:
+    pattern:  /v1/books/upload/book
+    defaults: { _controller: LifestutorInventoryBundle:Book:upload, _format: ~ }
+    requirements:
+        _method: POST
+
+lifestutor_inventory_book_upload_options:
+    pattern:  /v1/books/upload/book
+    defaults: { _controller: LifestutorInventoryBundle:Book:options, _format: ~ }
+    requirements:
+        _method: OPTIONS

@@ -90,21 +90,6 @@ class BookController extends FOSRestController
         return $this->handleView($view);
     }
 
-
-    /**
-     * Set serializtion context to Inventory group (for use with Inventory Web App)
-     * 
-     * @param FOS\RestBundle\View\View $view
-     *
-     * @return  FOS\RestBundle\View\View
-     */
-    private function setInventorySerializationContext($view)
-    {
-        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'inventory')));
-
-        return $view;
-    }
-
     /**
      * Create a Book from the submitted data.
      *
@@ -113,7 +98,7 @@ class BookController extends FOSRestController
      *   description = "Creates a new book from the submitted data.",
      *   input = "Lifestutor\InventoryBundle\Form\BookType",
      *   statusCodes = {
-     *     200 = "Returned when successful",
+     *     201 = "Returned when successful",
      *     400 = "Returned when the form has errors"
      *   }
      * )
@@ -132,6 +117,123 @@ class BookController extends FOSRestController
         }
 
         //$view->setFormat('json');
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Update a Book from the submitted data.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Updates a book woth the submitted data.",
+     *   input = "Lifestutor\InventoryBundle\Form\BookType",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @param Request $request the request object
+     *
+     * @return FormTypeInterface|View
+     */
+    public function updateAction(Request $request)
+    {
+        try {
+            $book = $this->container->get('lifestutor_store.book.service')->put($request->request->all());
+            $view = $this->view($book, Codes::HTTP_OK);
+        } catch (InvalidFormException $exception) {
+            $view = $this->view($exception->getForm(), Codes::HTTP_BAD_REQUEST);
+        }
+
+        //$view->setFormat('json');
+        
+        return $this->handleView($view);
+    }
+
+    /**
+     * Delete a book.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Deletes a book with a given id",
+     *   input = "Lifestutor\InventoryBundle\Document\Book",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the book is not found"
+     *   }
+     * )
+     *
+     * @param mixed  $id the book's id
+     *
+     * @return FormTypeInterface|View
+     *
+     * @throws ResourceNotFoundException when book not exist
+     */
+    public function deleteAction($id)
+    {
+        $book = $this->container->get('lifestutor_store.book.service')->delete($id);
+        $view = $this->setInventorySerializationContext($this->view($book, Codes::HTTP_OK));
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Patch a book.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Deletes a book with a given id",
+     *   input = "Lifestutor\InventoryBundle\Document\Book",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the book is not found"
+     *   }
+     * )
+     *
+     * @param mixed  $id the book's id
+     *
+     * @return FormTypeInterface|View
+     *
+     * @throws ResourceNotFoundException when book not exist
+     */
+    public function patchAction($id, Request $request)
+    {
+        $patchInstruction = $request->request->all();
+
+        foreach ($patchInstruction as $instruction) {
+            switch ($instruction['operation']) {
+                case 'publish':
+                    $book = $this->container->get('lifestutor_store.book.service')->publish($id);
+                    break;
+
+                case 'unpublish':
+                    $book = $this->container->get('lifestutor_store.book.service')->unPublish($id);
+                    break;
+            }
+        }
+
+        $view = $this->setInventorySerializationContext($this->view($book, Codes::HTTP_OK));
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Upload action
+     * 
+     * @param  Request $request
+     * 
+     * @return FormTypeInterface|View
+     */
+    public function uploadAction(Request $request)
+    {
+        try {
+            $books = $this->container->get('lifestutor_store.book_photo.service')->post($request);
+            $view = $this->view($books, Codes::HTTP_CREATED);
+        } catch (InvalidFormException $exception) {
+            $view = $this->view($exception->getForm(), Codes::HTTP_BAD_REQUEST);
+        }
 
         return $this->handleView($view);
     }
@@ -209,6 +311,20 @@ class BookController extends FOSRestController
     }*/
 
     /**
+     * Set serializtion context to Inventory group (for use with Inventory Web App)
+     * 
+     * @param FOS\RestBundle\View\View $view
+     *
+     * @return  FOS\RestBundle\View\View
+     */
+    private function setInventorySerializationContext($view)
+    {
+        $view->setSerializationContext(SerializationContext::create()->setGroups(array('Default', 'inventory')));
+
+        return $view;
+    }
+
+    /**
      * Fetch the book or throw a 404 exception.
      *
      * @param mixed $id
@@ -237,9 +353,10 @@ class BookController extends FOSRestController
     public function optionsAction()
     {
         $response = new Response();
-        $response->headers->set('Allow', 'OPTIONS, GET, PATCH, POST');
+        $response->headers->set('Allow', 'OPTIONS, GET, PATCH, POST, PUT');
         $response->headers->set('Access-Control-Allow-Headers', 'Authorization, X-Requested-With, Content-Type');
-        
+        $response->headers->set('Access-Control-Allow-Methods', 'OPTIONS, GET, PATCH, POST, PUT, DELETE');
+
         return $response;
     }
 }
