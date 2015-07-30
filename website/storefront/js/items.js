@@ -18,10 +18,13 @@
     // User's items controller.
     app.controller('ItemsController', function($http, APP_CONFIG) {
         var user   = this;
-        user.items = [];
+        user.items = [
+            { name: 'Jurrasic World', price: 1500 },
+            { name: 'Jupiter Ascending', price: 1800 }
+        ];
 
-        $http.get(APP_CONFIG.apiItemUrl).success(function(data){
+        /*$http.get(APP_CONFIG.apiItemUrl).success(function(data){
             user.items = data._embedded.items;
-        });
+        });*/
     });
 })();

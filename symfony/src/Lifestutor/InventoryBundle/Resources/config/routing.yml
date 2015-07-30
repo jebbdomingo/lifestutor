@@ -57,3 +57,28 @@ lifestutor_inventory_book_upload_options:
     defaults: { _controller: LifestutorInventoryBundle:Book:options, _format: ~ }
     requirements:
         _method: OPTIONS
+
+lifestutor_inventory_delete_book_photo:
+    pattern:  /v1/books/delete/photo/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Book:delete_photo, _format: ~ }
+    requirements:
+        _method: DELETE
+
+lifestutor_inventory_delete_book_photo_options:
+    pattern:  /v1/books/delete/photo/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Book:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
+# Routes for website's access to inventory
+lifestutor_inventory_storefont_catalog_all:
+    pattern:  /v1/storefront/catalogs
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:all, _format: ~ }
+    requirements:
+        _method: GET
+
+lifestutor_inventory_storefont_catalog_options:
+    pattern:  /v1/storefront/catalogs
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:options, _format: ~ }
+    requirements:
+        _method: OPTIONS

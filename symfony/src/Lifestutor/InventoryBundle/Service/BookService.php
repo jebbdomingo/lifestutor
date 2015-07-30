@@ -26,6 +26,11 @@ class BookService implements BookServiceInterface
     private $documentClass;
 
     /**
+     * Catalog class.
+     */
+    private $catalogClass;
+
+    /**
      * Form factory.
      */
     private $formFactory;
@@ -35,13 +40,15 @@ class BookService implements BookServiceInterface
      * 
      * @param doctrine             $doctrine_mongodb
      * @param string               $documentClass
+     * @param string               $catalogClass
      * @param FormFactoryInterface $formFactory
      */
-    public function __construct($doctrine_mongodb, $documentClass, FormFactoryInterface $formFactory)
+    public function __construct($doctrine_mongodb, $documentClass, $catalogClass, FormFactoryInterface $formFactory)
     {
         $this->dm               = $doctrine_mongodb->getManager();
         $this->documentClass    = $documentClass;
         $this->repository       = $doctrine_mongodb->getRepository($documentClass);
+        $this->catalogRepository = $doctrine_mongodb->getRepository($catalogClass);
         $this->formFactory      = $formFactory;
     }
 
@@ -54,7 +61,10 @@ class BookService implements BookServiceInterface
      */
     public function get($id)
     {
-        return $this->repository->find($id);
+        $book = $this->repository->find($id);
+        $book->getPhotos();
+
+        return $book;
     }
 
     /**
@@ -97,6 +107,14 @@ class BookService implements BookServiceInterface
     public function put(array $parameters)
     {
         $book = $this->get($parameters['id']);
+
+        foreach ($parameters['catalogs'] as $catalogs) {
+            error_log(print_r($catalogs, true), 0, '/var/log/apache2/error.log');
+            $catalog = $this->catalogRepository->find($catalogs['id']);
+
+            $book->deleteCatalog($catalog);
+            $book->addCatalogs($catalog);
+        }
 
         return $this->processForm($book, $parameters, 'PUT');
     }

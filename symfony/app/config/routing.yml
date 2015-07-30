@@ -1,3 +1,7 @@
+lifestutor_photo:
+    resource: "@LifestutorPhotoBundle/Resources/config/routing.yml"
+    prefix:   /
+
 lifestutor_inventory:
     type: rest
     prefix: /api

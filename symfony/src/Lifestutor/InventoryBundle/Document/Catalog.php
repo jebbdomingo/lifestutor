@@ -3,27 +3,34 @@
 namespace Lifestutor\InventoryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * @MongoDB\Document
  * @MongoDB\Index(unique=true, order="asc")
  * @ExclusionPolicy("all")
+ * @Serializer\XmlRoot("catalog")
+ * @Hateoas\Relation("self", href = "expr('/api/v1/catalogs/' ~ object.getId())")
  */
 class Catalog
 {
+
     /**
-     * @MongoDB\ReferenceMany(targetDocument="Item", mappedBy="catalogs")
+     * @MongoDB\ReferenceOne(targetDocument="Item", inversedBy="catalogs")
      */
-    private $items;
+    protected $item;
 
     /**
      * @MongoDB\Id
      * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $id;
 
@@ -31,12 +38,14 @@ class Catalog
      * @MongoDB\String
      * @Assert\NotBlank()
      * @Expose
+     * @Groups({"inventory", "storefront"})
      */
     protected $name;
 
     /**
      * @MongoDB\Boolean
      * @Expose
+     * @Groups({"inventory"})
      */
     protected $published;
 
@@ -46,8 +55,18 @@ class Catalog
     public function __construct($name)
     {
         $this->setName($name);
-        
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set item
+     *
+     * @param Item $item
+     * @return self
+     */
+    public function setItem($item)
+    {
+        $this->item = $item;
+        return $this;
     }
 
     /**

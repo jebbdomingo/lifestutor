@@ -2,7 +2,7 @@
     /**
      * Main app module.
      */
-    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'ui.router', 'app.Books', 'flow']);
+    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'ui.router', 'app.Books']);
 
     /**
      * Application Directive.
@@ -44,20 +44,4 @@
             }
         });
     });
-
-    app.config(['flowFactoryProvider', function (flowFactoryProvider) {
-        flowFactoryProvider.defaults = {
-            permanentErrors: [404, 500, 501],
-            maxChunkRetries: 1,
-            chunkRetryInterval: 5000,
-            simultaneousUploads: 4
-        };
-
-        flowFactoryProvider.on('catchAll', function (event) {
-            console.log('catchAll', arguments);
-        });
-
-        // Can be used with different implementations of Flow.js
-        // flowFactoryProvider.factory = fustyFlowFactory;
-    }]);
 })();

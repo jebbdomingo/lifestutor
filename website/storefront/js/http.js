@@ -48,7 +48,7 @@
 
         var items = {
             name: 'myitems',
-            url: '/myitems',
+            url: '/products',
             templateUrl: APP_CONFIG.baseUrl + "templates/my-items.html",
             data: {
                     //authorizedRoles: null //[USER_ROLES.member, USER_ROLES.admin]

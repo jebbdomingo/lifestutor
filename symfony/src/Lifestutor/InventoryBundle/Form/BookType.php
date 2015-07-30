@@ -16,6 +16,7 @@ class BookType extends AbstractType
     {
         $builder
             ->add('id')
+            //->add('catalogs', 'collection', array('type' => new CatalogType()))
             ->add('name')
             ->add('code')
             ->add('cost')
@@ -34,6 +35,7 @@ class BookType extends AbstractType
             'data_class' => 'Lifestutor\InventoryBundle\Document\Book',
             'csrf_protection' => false,
             'error_bubbling' => true,
+            'allow_extra_fields' => true,
         ));
     }
 

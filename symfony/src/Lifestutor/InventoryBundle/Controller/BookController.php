@@ -184,7 +184,7 @@ class BookController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Deletes a book with a given id",
+     *   description = "Publish/unpublish a book with a given id",
      *   input = "Lifestutor\InventoryBundle\Document\Book",
      *   statusCodes = {
      *     200 = "Returned when successful",
@@ -234,6 +234,21 @@ class BookController extends FOSRestController
         } catch (InvalidFormException $exception) {
             $view = $this->view($exception->getForm(), Codes::HTTP_BAD_REQUEST);
         }
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Delete a book photo.
+     *
+     * @param mixed $id the book's id
+     *
+     * @return FormTypeInterface|View
+     */
+    public function delete_photoAction($id)
+    {
+        $book = $this->container->get('lifestutor_store.book_photo.service')->delete($id);
+        $view = $this->setInventorySerializationContext($this->view($book, Codes::HTTP_OK));
 
         return $this->handleView($view);
     }

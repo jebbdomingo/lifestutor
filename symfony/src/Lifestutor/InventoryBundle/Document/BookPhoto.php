@@ -13,7 +13,6 @@ use JMS\Serializer\Annotation\Groups;
 
 /**
  * @MongoDB\Document
- * @MongoDB\HasLifecycleCallbacks 
  * @MongoDB\Index(unique=true, order="asc")
  * @ExclusionPolicy("all")
  */
@@ -40,9 +39,24 @@ class BookPhoto
     protected $filename;
 
     /**
+     * @MongoDB\Boolean
+     * @Expose
+     * @Groups({"inventory"})
+     */
+    protected $deleted;
+
+    /**
      * @MongoDB\ReferenceOne(targetDocument="Book", inversedBy="bookPhotos")
      */
     private $book;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->deleted = false;
+    }
 
     /**
      * Get id
@@ -139,7 +153,7 @@ class BookPhoto
      *
      * @return boolean $deleted
      */
-    public function isDSeleted()
+    public function isDeleted()
     {
         return $this->deleted;
     }

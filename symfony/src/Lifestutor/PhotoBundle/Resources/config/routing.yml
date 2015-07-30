@@ -1,0 +1,7 @@
+lifestutor_photo_homepage:
+    path:     /myhome/{name}
+    defaults: { _controller: LifestutorPhotoBundle:Default:index }
+
+lifestutor_photo_stream:
+    path:     /photo/{filename}
+    defaults: { _controller: LifestutorPhotoBundle:Photo:stream }

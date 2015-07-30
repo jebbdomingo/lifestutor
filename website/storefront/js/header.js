@@ -21,7 +21,7 @@
         this.signupModalId = APP_CONFIG.signupModalId;
         this.tabs = [
             {name: 'home', label: 'Home', url: ''},
-            {name: 'myitems', label: 'My Items', url: '#/myitems'}
+            {name: 'myitems', label: 'Products', url: '#/products'}
         ];
         this.tab = 'home'; // Active tab.
 

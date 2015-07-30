@@ -44,8 +44,28 @@ class Book extends Item
      * 
      * @return array
      */
+    public function initializePhotos()
+    {
+        // Removed photos marked as deleted.
+        foreach ($this->bookPhotos as $id => $photo) {
+            //error_log(print_r($id, true), 0, '/var/log/apache2/error.log');
+            if (!$photo->isDeleted()) {
+                $this->bookPhotos[$id] = $photo;
+            } else {
+                unset($this->bookPhotos[$id]);
+            }
+        }
+    }
+
+    /**
+     * Get photos
+     * 
+     * @return array
+     */
     public function getPhotos()
     {
+        $this->initializePhotos();
+
         return $this->bookPhotos;
     }
 

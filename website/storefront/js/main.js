@@ -2,7 +2,7 @@
     /**
      * Main app module.
      */
-    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'app.User', 'header', 'items', 'ui.router']);
+    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'app.User', 'header', 'items', 'catalogs', 'ui.router']);
 
     /**
      * Application Directive.
