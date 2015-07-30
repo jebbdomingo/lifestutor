@@ -24,7 +24,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Item
 {
     /**
-     * @MongoDB\ReferenceMany(targetDocument="Catalog", mappedBy="item")
+     * @MongoDB\ReferenceMany(targetDocument="Catalog", inversedBy="items")
      * @Expose
      * @Groups({"inventory", "storefront"})
      */
@@ -112,40 +112,27 @@ class Item
      * 
      * @param Catalog $catalog
      *
-     * @return this
+     * @return self
      */
     public function addCatalogs(Catalog $catalog)
     {
-        $catalog->setItem($this);
-
-        return $this;
-    }
-
-    
-    /**
-     * Delete catalog.
-     * 
-     * @param  Catalog $catalog
-     * 
-     * @return this
-     */
-    public function deleteCatalog(Catalog $catalog)
-    {
-        $catalog->setItem(null);
-
-        return $this;
-    }
-
-    /**
-     * Set catalogs (For Embedded Form)
-     * 
-     * @return ArrayCollection
-     */
-    public function setCatalogs(Catalog $catalog)
-    {
         $this->catalogs[] = $catalog;
+
+        return $this;
     }
 
+    /**
+     * Empty catalogs
+     *
+     * @return self
+     */
+    public function emptyCatalogs()
+    {
+        $this->catalogs = new ArrayCollection();
+        
+        return $this;
+    }
+    
     /**
      * Get catalogs
      * 

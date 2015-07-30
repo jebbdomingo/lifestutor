@@ -12,6 +12,8 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @MongoDB\Document
  * @MongoDB\Index(unique=true, order="asc")
@@ -23,9 +25,9 @@ class Catalog
 {
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Item", inversedBy="catalogs")
+     * @MongoDB\ReferenceMany(targetDocument="Item", mappedBy="catalogs")
      */
-    protected $item;
+    protected $items;
 
     /**
      * @MongoDB\Id
@@ -54,19 +56,8 @@ class Catalog
      */
     public function __construct($name)
     {
+        $this->items = new ArrayCollection();
         $this->setName($name);
-    }
-
-    /**
-     * Set item
-     *
-     * @param Item $item
-     * @return self
-     */
-    public function setItem($item)
-    {
-        $this->item = $item;
-        return $this;
     }
 
     /**

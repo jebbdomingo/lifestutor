@@ -108,11 +108,12 @@ class BookService implements BookServiceInterface
     {
         $book = $this->get($parameters['id']);
 
+        $book->emptyCatalogs();
+
         foreach ($parameters['catalogs'] as $catalogs) {
-            error_log(print_r($catalogs, true), 0, '/var/log/apache2/error.log');
+            //error_log(print_r($catalogs, true), 0, '/var/log/apache2/error.log');
             $catalog = $this->catalogRepository->find($catalogs['id']);
 
-            $book->deleteCatalog($catalog);
             $book->addCatalogs($catalog);
         }
 
