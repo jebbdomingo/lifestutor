@@ -1,0 +1,7 @@
+<a href="#"><i class="fa fa-edit fa-fw"></i> Items<span class="fa arrow"></span></a>
+<ul class="nav nav-second-level">
+    <li ng-repeat="catalog in catalogsCtrl.catalogs | orderBy:'-name'">
+        <a href="#/catalog/{{catalog.id}}">{{catalog.name}}</a>
+    </li>
+</ul>
+<!-- /.nav-second-level -->

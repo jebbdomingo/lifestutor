@@ -82,3 +82,16 @@ lifestutor_inventory_storefont_catalog_options:
     defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:options, _format: ~ }
     requirements:
         _method: OPTIONS
+
+# Catalog items
+lifestutor_inventory_catalog_items:
+    pattern:  /v1/catalog-items/{catalog_id}
+    defaults: { _controller: LifestutorInventoryBundle:Item:catalog_items, _format: ~ }
+    requirements:
+        _method: GET
+
+lifestutor_inventory_catalog_items_options:
+    pattern:  /v1/catalog-items/{id}
+    defaults: { _controller: LifestutorInventoryBundle:Item:options, _format: ~ }
+    requirements:
+        _method: OPTIONS

@@ -5,6 +5,8 @@ parameters:
     lifestutor_inventory.book_photo.class: Lifestutor\InventoryBundle\Document\BookPhoto
     lifestutor_inventory.catalog.service.class: Lifestutor\InventoryBundle\Service\CatalogService
     lifestutor_inventory.catalog.class: Lifestutor\InventoryBundle\Document\Catalog
+    lifestutor_inventory.item.service.class: Lifestutor\InventoryBundle\Service\ItemService
+    lifestutor_inventory.item.class: Lifestutor\InventoryBundle\Document\Item
 
 services:
     lifestutor_store.book.service:
@@ -18,3 +20,7 @@ services:
     lifestutor_inventory.catalog.service:
         class:      "%lifestutor_inventory.catalog.service.class%"
         arguments:  ["@doctrine_mongodb", "%lifestutor_inventory.catalog.class%", "@form.factory"]
+
+    lifestutor_inventory.item.service:
+        class:      "%lifestutor_inventory.item.service.class%"
+        arguments:  ["@doctrine_mongodb", "%lifestutor_inventory.item.class%", "%lifestutor_inventory.catalog.class%"]

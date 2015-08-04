@@ -73,10 +73,20 @@
                   }
         };
 
+        var catalogItems = {
+            name: 'catalog_items',
+            url: '/catalog/:catalog_id',
+            templateUrl: APP_CONFIG.baseUrl + "templates/catalog/items.html",
+            data: {
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.admin]
+                  }
+        };
+
         $stateProvider.state(dashboard);
         $stateProvider.state(books);
         $stateProvider.state(bookForm);
         $stateProvider.state(bookEditForm);
+        $stateProvider.state(catalogItems);
     });
 
     /**

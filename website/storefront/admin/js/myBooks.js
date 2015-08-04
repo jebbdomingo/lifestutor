@@ -150,7 +150,7 @@
         item.catalogs    = {};
 
         // Fetch list of catalogs from the server.
-        $http.get(APP_CONFIG.apiCategoryUrl).success(function(data){
+        $http.get(APP_CONFIG.apiCatalogsUrl).success(function(data){
             item.catalogs = data._embedded.items;
             console.log('Catalogs');
             console.log(item.catalogs);

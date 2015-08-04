@@ -2,16 +2,16 @@
     /**
      * Main app module.
      */
-    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'ui.router', 'app.Books']);
+    var app = angular.module('app', ['app.Config', 'app.Http', 'app.Auth', 'ui.router', 'app.Books', 'app.Catalogs']);
 
     /**
      * Application Directive.
      */
-    app.directive('myApp', function(APP_CONFIG){
+    app.directive('adminHeader', function(APP_CONFIG){
         return {
             restrict: 'E',
             scope: {},
-            templateUrl: APP_CONFIG.baseUrl + 'templates/main.html',
+            templateUrl: APP_CONFIG.baseUrl + 'templates/header.html',
             controller: 'ApplicationController',
             controllerAs: 'appCtrl'
         };
@@ -43,5 +43,9 @@
                 }
             }
         });
+
+        if (!AuthService.isAuthenticated()) {
+            location.assign("/");
+        }
     });
 })();

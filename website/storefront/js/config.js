@@ -11,7 +11,7 @@
      */
     app.constant('APP_CONFIG', {
         apiUserUrl:             'http://lifestutor.local:8083/api/v1/users',
-        apiCategoryUrl:         'http://lifestutor.local:8083/api/v1/storefront/catalogs',
+        apiCatalogsUrl:         'http://lifestutor.local:8083/api/v1/storefront/catalogs',
         apiItemUrl:             'http://lifestutor.local:8083/api/v1/items',
         apiShopUrl:             'http://lifestutor.local:8083/api/v1/shops',
         apiUserSignupUrl:       'http://lifestutor.local:8083/oauthserver/v1/signups',
@@ -19,6 +19,7 @@
         loginModalId:           '#loginModal',
         signupModalId:          '#signupModal',
         apiBookUrl:             'http://lifestutor.local:8083/api/v1/books',
+        apiCatalogItemsUrl:     'http://lifestutor.local:8083/api/v1/catalog-items',
         photoPathUrl:           'http://lifestutor.local:8083/photo',
         apiBooksDeletePhotoUrl: 'http://lifestutor.local:8083/api/v1/books/delete/photo',
         //apiBookUploadUrl:     'http://lifestutor.local:8083/api/v1/books/upload',

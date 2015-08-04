@@ -22,7 +22,7 @@
             { name: 'No catalog found', published: true }
         ];
 
-        $http.get(APP_CONFIG.apiCategoryUrl).success(function(data){
+        $http.get(APP_CONFIG.apiCatalogsUrl).success(function(data){
             console.log(data);
             ctrl.catalogs = data._embedded.items;
         });

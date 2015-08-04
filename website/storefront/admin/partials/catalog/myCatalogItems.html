@@ -1,0 +1,46 @@
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Items List</h3>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="#/book_form" role="button">New Item</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Item Type</th>
+                            <th>Name</th>
+                            <th class="text-right">Selling Price</th>
+                            <th class="text-right">Quantity</th>
+                            <th class="text-center">Published</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in catalogItemsCtrl.items | orderBy:'name'">
+                            <td>{{item.item_type}}</td>
+                            <td>{{item.name}}</td>
+                            <td class="text-right">{{ item.selling_price | currency : "PHP" }}</td>
+                            <td class="text-right">{{item.quantity}}</td>
+                            <td class="text-center">
+                                <a ng-if="item.published" class="btn btn-info btn-xs" href ng-click="booksCtrl.unPublish(item)">Published <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                                <a ng-if="!item.published" class="btn btn-warning btn-xs" href ng-click="booksCtrl.publish(item)">Unpublished <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <a class="btn btn-info btn-xs" href="#/book_form/{{item.id}}" role="button">Edit</a>
+                                    <a class="btn btn-danger btn-xs" href ng-click="booksCtrl.delete(item.id)" role="button">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+    </div>
+</div>
+<!-- /.col-lg-12 -->
