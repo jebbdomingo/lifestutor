@@ -70,19 +70,6 @@ lifestutor_inventory_delete_book_photo_options:
     requirements:
         _method: OPTIONS
 
-# Routes for website's access to inventory
-lifestutor_inventory_storefont_catalog_all:
-    pattern:  /v1/storefront/catalogs
-    defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:all, _format: ~ }
-    requirements:
-        _method: GET
-
-lifestutor_inventory_storefont_catalog_options:
-    pattern:  /v1/storefront/catalogs
-    defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:options, _format: ~ }
-    requirements:
-        _method: OPTIONS
-
 # Catalog items
 lifestutor_inventory_catalog_items:
     pattern:  /v1/catalog-items/{catalog_id}
@@ -91,7 +78,44 @@ lifestutor_inventory_catalog_items:
         _method: GET
 
 lifestutor_inventory_catalog_items_options:
-    pattern:  /v1/catalog-items/{id}
+    pattern:  /v1/catalog-items/{catalog_id}
     defaults: { _controller: LifestutorInventoryBundle:Item:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
+# Routes for website's access to inventory (Catalog)
+lifestutor_inventory_storefont_catalog_all:
+    pattern:  /v1/storefront/catalogs
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:all, _format: ~ }
+    requirements:
+        _method: GET
+lifestutor_inventory_storefont_catalog_options:
+    pattern:  /v1/storefront/catalogs
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontcatalog:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
+
+# Routes for website's access to inventory (Catalog Items)
+lifestutor_inventory_storefront_catalog_items:
+    pattern:  /v1/storefront/catalog-items/{catalog_id}
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontitem:catalog_items, _format: ~ }
+    requirements:
+        _method: GET
+lifestutor_inventory_storefront_catalog_items_options:
+    pattern:  /v1/storefront/catalog-items/{catalog_id}
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontitem:options, _format: ~ }
+    requirements:
+        _method: OPTIONS
+
+# Routes for website's access to inventory (Items)
+lifestutor_inventory_storefront_items_all:
+    pattern:  /v1/storefront/items
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontitem:all, _format: ~ }
+    requirements:
+        _method: GET
+lifestutor_inventory_storefront_items_options:
+    pattern:  /v1/storefront/items
+    defaults: { _controller: LifestutorInventoryBundle:Storefrontitem:options, _format: ~ }
     requirements:
         _method: OPTIONS

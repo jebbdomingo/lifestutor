@@ -45,6 +45,21 @@ class ItemService
     }
 
     /**
+     * Get all items.
+     *
+     * @param integer $limit  The limit of the result.
+     * @param integer $offset Starting from the offset.
+     *
+     * @return array
+     */
+    public function all($limit = 5, $offset = 0)
+    {
+        return $this->itemRepository->findBy(
+                array('deleted' => false)
+            );
+    }
+
+    /**
      * Get specific item by id.
      *
      * @param mixded $id

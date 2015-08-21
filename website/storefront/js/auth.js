@@ -102,7 +102,7 @@
 
         authService.isAuthenticated = function () {
             var result = !!Session.getToken();
-            console.log("Is Authenticated: " + result);
+            //console.log("Is Authenticated: " + result);
 
             // In case of browser refresh re-initiliaze API to append the token on each HTTP request.
             if (result) {

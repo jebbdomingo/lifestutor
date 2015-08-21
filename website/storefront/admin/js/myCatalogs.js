@@ -42,12 +42,13 @@
 
     // Catalog items list controller.
     app.controller('CatalogItemsController', function($http, $state, $stateParams, APP_CONFIG) {
-        var catalog_id   = $stateParams.catalog_id;
-        var $this        = this;
-        $this.items      = [];
+        var catalogid = $stateParams.catalog_id;
+        var $this     = this;
+
+        $this.items = [];
 
         this.fetchCatalogItems = function() {
-            $http.get(APP_CONFIG.apiCatalogItemsUrl + '/' + catalog_id).success(function(data){
+            $http.get(APP_CONFIG.apiCatalogItemsUrl + '/' + catalogid).success(function(data){
                 $this.items = data._embedded.items;
             });
         };

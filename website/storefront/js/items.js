@@ -16,15 +16,35 @@
     });
 
     // User's items controller.
-    app.controller('ItemsController', function($http, APP_CONFIG) {
-        var user   = this;
-        user.items = [
-            { name: 'Jurrasic World', price: 1500 },
-            { name: 'Jupiter Ascending', price: 1800 }
-        ];
+    app.controller('ItemsController', function($http, $location, APP_CONFIG) {
+        var $this      = this;
+        var $catalogId = $location.search().catalog;
+        var $url       = null;
 
-        /*$http.get(APP_CONFIG.apiItemUrl).success(function(data){
-            user.items = data._embedded.items;
-        });*/
+        $this.items = [];
+
+        console.log($catalogId);
+
+        if ($catalogId) {
+            $url = APP_CONFIG.apiStoreCatalogItemsUrl + '/' + $catalogId;
+        } else {
+            $url = APP_CONFIG.apiStoreItemsUrl;
+        }
+
+        $http.get($url).success(function(data){
+            $this.items = data._embedded.items;
+        });
+
+        this.getCatalogItems = function(catalogId) {
+            console.log(catalogId);
+            //var path = $location.path('/products/123');
+            var path = $location.search('catalog', catalogId);
+            
+            var $url = APP_CONFIG.apiStoreCatalogItemsUrl + '/' + catalogId;
+
+            $http.get($url).success(function(data){
+                $this.items = data._embedded.items;
+            });
+        };
     });
 })();

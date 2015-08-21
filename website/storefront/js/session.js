@@ -44,7 +44,7 @@
                 //this.currentUser = (user !== null) ? JSON.parse(user) : null;
                 if (user !== null) {
                     this.currentUser = JSON.parse(user);
-                    console.log('session.js:46 JSON.parse is called');
+                    //console.log('session.js:46 JSON.parse is called');
                 } else {
                     this.currentUser = null;
                 }

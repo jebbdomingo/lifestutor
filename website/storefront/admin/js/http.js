@@ -27,7 +27,6 @@
     app.factory('Api', function ($http, Session) {
         return {
             init: function (token) {
-                console.log('http request triggered');
                 $http.defaults.headers.common['Authorization'] = "Bearer " + token || Session.getToken();
             }
         };

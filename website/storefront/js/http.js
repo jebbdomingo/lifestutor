@@ -27,8 +27,12 @@
     app.factory('Api', function ($http, Session) {
         return {
             init: function (token) {
-                console.log('http request triggered');
-                $http.defaults.headers.common['Authorization'] = "Bearer " + token || Session.getToken();
+                if (token) {
+                    console.log(token);
+                    $http.defaults.headers.common['Authorization'] = "Bearer " + token || Session.getToken();
+                } else {
+                    console.log('no token ' + token);
+                }
             }
         };
     });
@@ -37,26 +41,7 @@
      * Routes
      */
     app.config(function ($stateProvider, APP_CONFIG, USER_ROLES) {
-        var home = {
-            name: 'home',
-            url: '',
-            templateUrl: APP_CONFIG.baseUrl + "templates/userhome.html",
-            data: {
-                    authorizedRoles: null
-                  }
-        };
-
-        var items = {
-            name: 'myitems',
-            url: '/products',
-            templateUrl: APP_CONFIG.baseUrl + "templates/my-items.html",
-            data: {
-                    //authorizedRoles: null //[USER_ROLES.member, USER_ROLES.admin]
-                    authorizedRoles: [USER_ROLES.member, USER_ROLES.admin]
-                  }
-        };
-
-        var shops = {
+        /*var shops = {
             name: 'myshops',
             url: '/myshops',
             templateUrl: APP_CONFIG.baseUrl + "templates/my-shops.html",
@@ -64,7 +49,7 @@
                     //authorizedRoles: null //[USER_ROLES.member, USER_ROLES.admin]
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.admin]
                   }
-        };
+        };*/
 
         var login = {
             name: 'login',
@@ -84,11 +69,41 @@
                   }
         };
 
-        $stateProvider.state(home);
-        $stateProvider.state(items);
-        $stateProvider.state(shops);
+        var home = {
+            name: 'home',
+            url: '',
+            templateUrl: APP_CONFIG.baseUrl + "templates/userhome.html",
+            data: {
+                    authorizedRoles: null
+                  }
+        };
+
+        var items = {
+            name: 'items',
+            url: '/products',
+            templateUrl: APP_CONFIG.baseUrl + "templates/my-items.html",
+            reloadOnSearch: false,
+            data: {
+                    authorizedRoles: null //[USER_ROLES.member, USER_ROLES.admin]
+                  },
+        };
+
+        /*var catalogItems = {
+            name: 'catalog_items',
+            url: '/products',
+            templateUrl: APP_CONFIG.baseUrl + "templates/my-items.html",
+            data: {
+                    authorizedRoles: null //[USER_ROLES.member, USER_ROLES.admin]
+                  },
+            reloadOnSearch: false
+        };*/
+
         $stateProvider.state(login);
         $stateProvider.state(logout);
+        $stateProvider.state(home);
+        $stateProvider.state(items);
+        //$stateProvider.state(catalogItems);
+        //$stateProvider.state(shops);
     });
 
     /**
@@ -97,18 +112,4 @@
     app.run(['Api', function(Api) {
         Api.init();
     }]);
-
-    /*app.run(['$http', 'Session', '$injector', function($http, Session,$injector) {
-        $injector.get("$http").defaults.transformRequest = [function(data, headersGetter) {
-            console.log('http request triggered');
-            if (Session.getToken()) {
-                //headersGetter()['Authorization'] = "Bearer " + Session.getToken();
-                $http.defaults.headers.common['Authorization'] = "Bearer " + Session.getToken();
-                console.log($http.defaults.headers.common);
-            }
-
-            if (data)
-                return angular.toJson(data);
-        }].concat($http.defaults.transformRequest);
-    }]);*/
 })();

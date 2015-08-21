@@ -1,5 +1,5 @@
 <div class="list-group">
-    <a href="#" class="list-group-item" ng-repeat="catalog in catalogsCtrl.catalogs | orderBy:'-price'">
+    <a href ng-click="itemsCtrl.getCatalogItems(catalog.id)" class="list-group-item" ng-repeat="catalog in catalogsCtrl.catalogs | orderBy:'-price'">
         {{catalog.name}}
     </a>
 </div>
